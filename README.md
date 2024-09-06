@@ -41,6 +41,7 @@ For non NVIDIA cards, point to the json file for your GPU for the VK_ICD_FILENAM
 My code comments are based on the information from the **Vulkan Tutorial** website.
 Followed the instruction from the *Introduction* section and finish up to the *Drawing a triangle* section.
 - https://vulkan-tutorial.com/
+- [How can I fix my vulkan, why does my vulkaninfo fail?](https://askubuntu.com/questions/1484510/how-can-i-fix-my-vulkan-why-does-my-vulkaninfo-fail)
 
 ### Sections of the Vulkan Tutorial website I followed:
 - [Introduction](https://vulkan-tutorial.com/Introduction)
