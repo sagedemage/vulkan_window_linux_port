@@ -27,6 +27,7 @@ find_package(glfw3 REQUIRED)
 
 file(COPY src/shaders DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY lint_codebase.sh DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY run.sh DESTINATION ${CMAKE_BINARY_DIR})
 
 add_executable(VulkanWindow 
 	src/main.cpp
