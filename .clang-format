@@ -10,4 +10,4 @@ BasedOnStyle: Google
 # Custom settings
 TabWidth: 4
 IndentWidth: 4
-LineEnding: LF
+UseCRLF: false
