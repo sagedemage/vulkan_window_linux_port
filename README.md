@@ -25,10 +25,17 @@ sudo apt install libxxf86vm-dev libxi-dev
 ```
 
 ## Check the Vulkan Install Works
-Run this command and if there is no output, then you are good.
+Run this command and if there is no output, then you are good. Check the command below if that does not work.
 ```
 vulkaninfo --summary | grep "WARNING"
 ```
+
+For NVIDIA, run this command. If there is not output, then you are good.
+```
+VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json vulkaninfo --summary | grep "WARNING"
+```
+
+For non NVIDIA cards, point to the json file for your GPU for the VK_ICD_FILENAMES environmental variable.
 
 ## Resources
 My code comments are based on the information from the **Vulkan Tutorial** website.
