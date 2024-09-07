@@ -169,7 +169,7 @@ void TriangleApplication::CreateInstance() {
             "vkCreateInstance ERROR: failed to create instance!");
     }
 
-    // CheckExtensionSupport();
+    CheckExtensionSupport();
 }
 
 bool TriangleApplication::CheckValidationLayerSupport() {
@@ -253,7 +253,7 @@ void TriangleApplication::SetupDebugMessenger() {
     // Create the extension object if it is available
     if (CreateDebugUtilsMessengerEXT(instance, &create_info, nullptr,
                                      &debug_messenger) != VK_SUCCESS) {
-        throw std::runtime_error("failed to set up debug messenger!");
+        throw std::runtime_error("CreateDebugUtilsMessengerEXT Error: failed to set up debug messenger!");
     }
 }
 
@@ -308,7 +308,7 @@ void TriangleApplication::PickPhysicalDevice() {
     vkEnumeratePhysicalDevices(instance, &device_count, nullptr);
 
     if (device_count == 0) {
-        throw std::runtime_error("failed to find GPUs with Vulkan support!");
+        throw std::runtime_error("vkEnumeratePhysicalDevices Error: failed to find GPUs with Vulkan support!");
     }
 
     // Allocate an array to hold all of the VkPhysicalDevice handles
@@ -324,7 +324,7 @@ void TriangleApplication::PickPhysicalDevice() {
     }
 
     if (physical_device == VK_NULL_HANDLE) {
-        throw std::runtime_error("failed to find a suitable GPU!");
+        throw std::runtime_error("vkEnumeratePhysicalDevices Error: failed to find a suitable GPU!");
     }
 }
 
@@ -448,7 +448,7 @@ void TriangleApplication::CreateLogicalDevice() {
     // Instantiate the logical device
     if (vkCreateDevice(physical_device, &create_info, nullptr, &device) !=
         VK_SUCCESS) {
-        throw std::runtime_error("failed to create logical device!");
+        throw std::runtime_error("vkCreateDevice Error: failed to create logical device!");
     }
 
     if (indices.graphics_family.has_value() &&
@@ -468,7 +468,7 @@ void TriangleApplication::CreateSurface() {
     // Cross platform way to create the window surface via GLFW
     if (glfwCreateWindowSurface(instance, window, nullptr, &surface) !=
         VK_SUCCESS) {
-        throw std::runtime_error("failed to create window surface!");
+        throw std::runtime_error("glfwCreateWindowSurface Error: failed to create window surface!");
     }
 }
 
@@ -686,7 +686,7 @@ void TriangleApplication::CreateSwapChain() {
     // Create the swap chain
     if (vkCreateSwapchainKHR(device, &create_info, nullptr, &swap_chain) !=
         VK_SUCCESS) {
-        throw std::runtime_error("failed to create swap chain!");
+        throw std::runtime_error("vkCreateSwapchainKHR Error: failed to create swap chain!");
     }
 
     // Retrieve the swap chain images
@@ -736,7 +736,7 @@ void TriangleApplication::CreateImageViews() {
         // Create the image view
         if (vkCreateImageView(device, &create_info, nullptr,
                               &swap_chain_image_views[i]) != VK_SUCCESS) {
-            throw std::runtime_error("failed to create image views!");
+            throw std::runtime_error("vkCreateImageView Error: failed to create image views!");
         }
     }
 }
@@ -897,7 +897,7 @@ void TriangleApplication::CreateGraphicsPipeline() {
     // Create pipeline layout
     if (vkCreatePipelineLayout(device, &pipeline_layout_info, nullptr,
                                &pipeline_layout) != VK_SUCCESS) {
-        throw std::runtime_error("failed to create pipeline layout!");
+        throw std::runtime_error("vkCreatePipelineLayout Error: failed to create pipeline layout!");
     }
 
     // Describe the graphics pipeline information
@@ -922,7 +922,7 @@ void TriangleApplication::CreateGraphicsPipeline() {
     // Create graphics pipeline
     if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipeline_info,
                                   nullptr, &graphics_pipeline) != VK_SUCCESS) {
-        throw std::runtime_error("failed to create graphics pipeline!");
+        throw std::runtime_error("vkCreateGraphicsPipelines Error: failed to create graphics pipeline!");
     }
 
     // Destroy shader modules
@@ -964,7 +964,7 @@ VkShaderModule TriangleApplication::CreateShaderModule(
     VkShaderModule shader_module = nullptr;
     if (vkCreateShaderModule(device, &create_info, nullptr, &shader_module) !=
         VK_SUCCESS) {
-        throw std::runtime_error("failed to create shader module!");
+        throw std::runtime_error("vkCreateShaderModule Error: failed to create shader module!");
     }
     return shader_module;
 }
@@ -1093,7 +1093,7 @@ void TriangleApplication::CreateRenderPass() {
 
     if (vkCreateRenderPass(device, &render_pass_info, nullptr, &render_pass) !=
         VK_SUCCESS) {
-        throw std::runtime_error("failed to create render pass!");
+        throw std::runtime_error("vkCreateRenderPass Error: failed to create render pass!");
     }
 }
 
@@ -1118,7 +1118,7 @@ void TriangleApplication::CreateFramebuffers() {
         // Create the framebuffer
         if (vkCreateFramebuffer(device, &framebuffer_info, nullptr,
                                 &swap_chain_framebuffers[i]) != VK_SUCCESS) {
-            throw std::runtime_error("failed to create framebuffer!");
+            throw std::runtime_error("vkCreateFramebuffer Error: failed to create framebuffer!");
         }
     }
 }
@@ -1156,7 +1156,7 @@ void TriangleApplication::CreateCommandPool() {
     // Create the command pool
     if (vkCreateCommandPool(device, &pool_info, nullptr, &command_pool) !=
         VK_SUCCESS) {
-        throw std::runtime_error("failed to create command pool!");
+        throw std::runtime_error("vkCreateCommandPool Error: failed to create command pool!");
     }
 }
 
@@ -1182,7 +1182,7 @@ void TriangleApplication::CreateCommandBuffers() {
     // Allocate command buffers
     if (vkAllocateCommandBuffers(device, &alloc_info, command_buffers.data()) !=
         VK_SUCCESS) {
-        throw std::runtime_error("failed to allocate command buffers!");
+        throw std::runtime_error("vkAllocateCommandBuffers Error: failed to allocate command buffers!");
     }
 }
 
@@ -1206,7 +1206,7 @@ void TriangleApplication::RecordCommandBuffer(VkCommandBuffer command_buffer,
 
     // Record the command buffer
     if (vkBeginCommandBuffer(command_buffer, &begin_info) != VK_SUCCESS) {
-        throw std::runtime_error("failed to begin recording command buffer!");
+        throw std::runtime_error("vkBeginCommandBuffer Error: failed to begin recording command buffer!");
     }
 
     /* Starting a render pass */
@@ -1282,7 +1282,7 @@ void TriangleApplication::RecordCommandBuffer(VkCommandBuffer command_buffer,
 
     // Finish recording the command buffer
     if (vkEndCommandBuffer(command_buffer) != VK_SUCCESS) {
-        throw std::runtime_error("failed to record command buffer!");
+        throw std::runtime_error("vkEndCommandBuffer Error: failed to record command buffer!");
     }
 }
 
@@ -1331,7 +1331,7 @@ void TriangleApplication::DrawFrame() {
         RecreateSwapChain();
         return;
     } else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
-        throw std::runtime_error("failed to acquire swap chain image!");
+        throw std::runtime_error("vkAcquireNextImageKHR Error: failed to acquire swap chain image!");
     }
 
     /* Fixing a deadlock */
@@ -1379,7 +1379,7 @@ void TriangleApplication::DrawFrame() {
     // Submit the command buffer to the graphics queue
     if (vkQueueSubmit(graphics_queue, 1, &submit_info,
                       in_flight_fences[current_frame]) != VK_SUCCESS) {
-        throw std::runtime_error("failed to submit draw command buffer!");
+        throw std::runtime_error("vkQueueSubmit Error: failed to submit draw command buffer!");
     }
 
     /* Presentation */
@@ -1414,7 +1414,7 @@ void TriangleApplication::DrawFrame() {
         framebuffer_resized = false;
         RecreateSwapChain();
     } else if (result != VK_SUCCESS) {
-        throw std::runtime_error("failed to present swap chain image!");
+        throw std::runtime_error("vkQueuePresentKHR Error: failed to present swap chain image!");
     }
 
     // Advance to the next frame every time
@@ -1462,7 +1462,7 @@ void TriangleApplication::CreateSyncObjects() {
             vkCreateFence(device, &fence_info, nullptr, &in_flight_fences[i]) !=
                 VK_SUCCESS) {
             throw std::runtime_error(
-                "failed to create synchronization objects for a frame!");
+                "vkCreateSemaphore and vkCreateFence Error: failed to create synchronization objects for a frame!");
         }
     }
 }
