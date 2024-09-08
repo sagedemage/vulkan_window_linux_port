@@ -4,8 +4,19 @@
 /* Third party libraries */
 #include <vulkan/vulkan.h>
 
+/*
+- VK_USE_PLATFORM_XLIB_KHR
+- VK_USE_PLATFORM_WAYLAND_KHR
+*/
+#define VK_USE_PLATFORM_XLIB_KHR
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+
+/*
+- GLFW_EXPOSE_NATIVE_X11
+- GLFW_EXPOSE_NATIVE_WAYLAND
+*/
+#define GLFW_EXPOSE_NATIVE_X11
 #include <GLFW/glfw3native.h>
 
 #define GLM_FORCE_RADIUS
