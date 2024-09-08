@@ -218,6 +218,10 @@ std::vector<const char*> TriangleApplication::GetRequiredExtensions() {
         extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
     }
 
+    /*
+     * VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME:
+     * the VK_KHR_get_physical_device_properties2 instance extension
+     */
     extensions.push_back(
         VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
 
